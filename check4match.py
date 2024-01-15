@@ -17,14 +17,11 @@ def check4match(face1_emcoding, face2_encoding):
 
 def load_image():
     image_path = input("Enter the path of the image: ")
-    image = face_recognition.load_image_file(image_path)
-    return image
+    return face_recognition.load_image_file(image_path)
 
 
 def get_encoding(image):
-    # get the face encoding of the image
-    face_encoding = face_recognition.face_encodings(image)[0]
-    return face_encoding
+    return face_recognition.face_encodings(image)[0]
 
 
 def main():
