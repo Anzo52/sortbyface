@@ -1,0 +1,20 @@
+{
+    "recommendations": [
+        "ms-python.black-formatter",
+        "vivaxy.vscode-conventional-commits",
+        "igorsbitnev.error-gutters",
+        "xirider.livecode",
+        "yzhang.markdown-all-in-one",
+        "davidanson.vscode-markdownlint",
+        "shinsentoh.vscode-manage-extensions-workspaces",
+        "did1335.opencv-intellisense",
+        "shardulm94.trailing-spaces",
+        "twixes.pypi-assistant",
+        "kevinrose.vsc-python-indent",
+        "mgesbert.python-path",
+        "njqdev.vscode-python-typehint",
+        "sourcery.sourcery",
+        "qwtel.sqlite-viewer",
+        "rafamel.subtle-brackets"
+    ]
+}
