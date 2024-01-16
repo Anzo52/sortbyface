@@ -1,5 +1,4 @@
 import face_recognition
-import os
 from pathlib import Path
 from shutil import copyfile
 
@@ -9,12 +8,11 @@ def process_file(filepath):
     action_taken, encodings = acta(faceencodings)
     if not action_taken:
         curr_image_cluster_id = get_curr_image_cluster_id(faceencodings, encodings)
-    results_path = os.path.join(os.getcwd(), "results")
-    curr_cluster = os.path.join(results_path, curr_image_cluster_id)
-    curr_cluster_dir = Path(curr_cluster)
-    curr_cluster_dir.mkdir(parents=True, exist_ok=True)
-    filename = os.path.basename(filepath)
-    copyfile(filepath, os.path.join(curr_cluster_dir, filename))
+    results_path = Path.cwd() / "results"
+    curr_cluster = results_path / curr_image_cluster_id
+    curr_cluster.mkdir(parents=True, exist_ok=True)
+    filename = Path(filepath).name
+    copyfile(filepath, curr_cluster / filename)
     return encodings
 
 
@@ -54,12 +52,8 @@ def get_faceencodings(filepath):
 
 
 def process_cluster():
-    dataset_path = os.path.join(os.getcwd(), "dataset")
-    filepaths = [
-        os.path.join(subdir, file)
-        for subdir, _, files in os.walk(dataset_path)
-        for file in files
-    ]
+    dataset_path = Path.cwd() / "dataset2"
+    filepaths = [str(filepath) for filepath in dataset_path.iterdir()]
     for filepath in filepaths:
         process_file(filepath)
         print(f"processed {filepath}")
