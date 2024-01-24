@@ -1,7 +1,6 @@
 import face_recognition
 from pathlib import Path
 from shutil import copyfile
-import os
 
 
 def process_file(filepath):
@@ -12,7 +11,7 @@ def process_file(filepath):
     results_path = Path.cwd() / "results"
     curr_cluster = results_path / curr_image_cluster_id
     curr_cluster.mkdir(parents=True, exist_ok=True)
-    filename = Path(filepath).name
+    filename = filepath.name
     copyfile(filepath, curr_cluster / filename)
     return encodings
 
@@ -45,7 +44,7 @@ def get_results(faceencodings, cluster_id, cluster_encodings):
 
 
 def get_faceencodings(filepath):
-    img = face_recognition.load_image_file(filepath)
+    img = face_recognition.load_image_file(str(filepath))
     faceencodings = face_recognition.face_encodings(img)
     if faceencodings:
         faceencodings = faceencodings[0]
@@ -54,7 +53,7 @@ def get_faceencodings(filepath):
 
 def process_cluster():
     dataset_path = Path.cwd() / "dataset2"
-    filepaths = [str(filepath) for filepath in dataset_path.iterdir()]
+    filepaths = list(dataset_path.iterdir())
     for filepath in filepaths:
         process_file(filepath)
         print(f"processed {filepath}")
@@ -62,24 +61,8 @@ def process_cluster():
     return True
 
 
-
-
 def get_dataset_path():
-    cwd = os.getcwd()
-    return os.path.join(cwd, "dataset")
-
-
-def get_filepaths(dataset_path):
-    return [
-        os.path.join(subdir, file)
-        for subdir, _, files in os.walk(dataset_path)
-        for file in files
-    ]
-
-
-def fp():
-    dataset_path = get_dataset_path()
-    return get_filepaths(dataset_path)
+    return Path.cwd() / "dataset"
 
 
 def main():
