@@ -14,9 +14,13 @@ def get_filepaths(dataset_path):
     ]
 
 
-def main():
+def fp():
     dataset_path = get_dataset_path()
-    filepaths = get_filepaths(dataset_path)
+    return get_filepaths(dataset_path)
+
+
+def main():
+    filepaths = fp()
     for filepath in filepaths:
         print(filepath)
 
