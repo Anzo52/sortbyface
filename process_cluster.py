@@ -1,6 +1,7 @@
 import face_recognition
 from pathlib import Path
 from shutil import copyfile
+import os
 
 
 def process_file(filepath):
@@ -59,6 +60,26 @@ def process_cluster():
         print(f"processed {filepath}")
     print("done")
     return True
+
+
+
+
+def get_dataset_path():
+    cwd = os.getcwd()
+    return os.path.join(cwd, "dataset")
+
+
+def get_filepaths(dataset_path):
+    return [
+        os.path.join(subdir, file)
+        for subdir, _, files in os.walk(dataset_path)
+        for file in files
+    ]
+
+
+def fp():
+    dataset_path = get_dataset_path()
+    return get_filepaths(dataset_path)
 
 
 def main():
