@@ -18,8 +18,7 @@ def main():
     dataset_path = get_dataset_path()
     filepaths = get_filepaths(dataset_path)
     for filepath in filepaths:
-        print(f"File: {filepath}")
-    return filepaths
+        print(filepath)
 
 
 if __name__ == "__main__":
